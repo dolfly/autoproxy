@@ -5,9 +5,9 @@ import (
 	"log"
 	"sync"
 
+	"github.com/dolfly/autoproxy/pkg/proxy"
+	"github.com/dolfly/autoproxy/pkg/tool"
 	"github.com/gocolly/colly"
-	"github.com/zu1k/proxypool/pkg/proxy"
-	"github.com/zu1k/proxypool/pkg/tool"
 )
 
 func init() {

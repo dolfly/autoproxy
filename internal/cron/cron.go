@@ -3,8 +3,8 @@ package cron
 import (
 	"runtime"
 
+	"github.com/dolfly/autoproxy/internal/app"
 	"github.com/jasonlvhit/gocron"
-	"github.com/zu1k/proxypool/internal/app"
 )
 
 func Cron() {

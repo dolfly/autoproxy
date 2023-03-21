@@ -6,15 +6,18 @@ import (
 	"os"
 	"strings"
 
+	"github.com/dolfly/autoproxy/pkg/tool"
 	"github.com/ghodss/yaml"
-	"github.com/zu1k/proxypool/pkg/tool"
 )
 
 var configFilePath = "config.yaml"
 
 type ConfigOptions struct {
-	Domain      string   `json:"domain" yaml:"domain"`
-	DatabaseUrl string   `json:"database_url" yaml:"database_url"`
+	Domain   string `json:"domain" yaml:"domain"`
+	Database struct {
+		Driver string `json:"driver" yaml:"driver"`
+		Url    string `json:"url" yaml:"url"`
+	} `json:"database" yaml:"database_url"`
 	CFEmail     string   `json:"cf_email" yaml:"cf_email"`
 	CFKey       string   `json:"cf_key" yaml:"cf_key"`
 	SourceFiles []string `json:"source-files" yaml:"source-files"`

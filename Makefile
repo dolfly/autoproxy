@@ -1,4 +1,4 @@
-NAME=proxypool
+NAME=autoproxy
 BINDIR=bin
 VERSION=$(shell git describe --tags || echo "unknown version")
 GOBUILD=CGO_ENABLED=0 go build -trimpath -ldflags '-w -s'

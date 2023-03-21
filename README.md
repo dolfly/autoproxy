@@ -5,14 +5,14 @@
 <h5 align="center">自动抓取tg频道、订阅地址、公开互联网上的ss、ssr、vmess、trojan节点信息，聚合去重测试可用性后提供节点列表</h5>
 
 <p align="center">
-  <a href="https://github.com/zu1k/proxypool/actions">
-    <img src="https://img.shields.io/github/workflow/status/zu1k/proxypool/Go?style=flat-square" alt="Github Actions">
+  <a href="https://github.com/dolfly/autoproxy/actions">
+    <img src="https://img.shields.io/github/workflow/status/dolfly/autoproxy/Go?style=flat-square" alt="Github Actions">
   </a>
-  <a href="https://goreportcard.com/report/github.com/zu1k/proxypool">
-    <img src="https://goreportcard.com/badge/github.com/zu1k/proxypool?style=flat-square">
+  <a href="https://goreportcard.com/report/github.com/dolfly/autoproxy">
+    <img src="https://goreportcard.com/badge/github.com/dolfly/autoproxy?style=flat-square">
   </a>
-  <a href="https://github.com/zu1k/proxypool/releases">
-    <img src="https://img.shields.io/github/release/zu1k/proxypool/all.svg?style=flat-square">
+  <a href="https://github.com/dolfly/autoproxy/releases">
+    <img src="https://img.shields.io/github/release/dolfly/autoproxy/all.svg?style=flat-square">
   </a>
 </p>
 
@@ -46,17 +46,17 @@
 需要安装Golang
 
 ```sh
-$ go get -u -v github.com/zu1k/proxypool
+$ go get -u -v github.com/dolfly/autoproxy
 ```
 
 ### 下载预编译程序
 
-从这里下载预编译好的程序 [release](https://github.com/zu1k/proxypool/releases)
+从这里下载预编译好的程序 [release](https://github.com/dolfly/autoproxy/releases)
 
 ### 使用docker
 
 ```sh
-docker pull docker.pkg.github.com/zu1k/proxypool/proxypool:latest
+docker pull docker.pkg.github.com/dolfly/autoproxy:latest
 ```
 
 ## 使用
@@ -82,7 +82,5 @@ proxypool -c config.yaml
 ![Fast](docs/fast.png)
 
 ## 声明
-
-本项目遵循 GNU General Public License v3.0 开源，在此基础上，所有使用本项目提供服务者都必须在网站首页保留指向本项目的链接
-
+所有使用本项目提供服务者都必须在网站首页保留指向本项目的链接
 禁止使用本项目进行营利和做其他违法事情，产生的一切后果本项目概不负责

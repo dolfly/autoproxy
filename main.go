@@ -3,27 +3,20 @@ package main
 import (
 	"flag"
 	"fmt"
-	"net/http"
-	_ "net/http/pprof"
 	"os"
 
-	"github.com/zu1k/proxypool/api"
-	"github.com/zu1k/proxypool/internal/app"
-	"github.com/zu1k/proxypool/internal/cron"
-	"github.com/zu1k/proxypool/internal/database"
-	"github.com/zu1k/proxypool/pkg/proxy"
+	"github.com/dolfly/autoproxy/api"
+	"github.com/dolfly/autoproxy/internal/app"
+	"github.com/dolfly/autoproxy/internal/cron"
+	"github.com/dolfly/autoproxy/internal/database"
+	"github.com/dolfly/autoproxy/pkg/proxy"
 )
 
 var configFilePath = ""
 
 func main() {
-	go func() {
-		http.ListenAndServe("0.0.0.0:6060", nil)
-	}()
-
 	flag.StringVar(&configFilePath, "c", "", "path to config file: config.yaml")
 	flag.Parse()
-
 	if configFilePath == "" {
 		configFilePath = os.Getenv("CONFIG_FILE")
 	}
@@ -34,7 +27,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	database.InitTables()
 	proxy.InitGeoIpDB()
 	fmt.Println("Do the first crawl...")

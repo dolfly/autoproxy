@@ -5,6 +5,7 @@
 *.so
 *.dylib
 bin/*
+autoproxy
 
 # Test binary, build with `go test -c`
 *.test

@@ -3,27 +3,18 @@ package proxy
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net"
 	"os"
 
+	"github.com/dolfly/autoproxy/assets"
 	"github.com/oschwald/geoip2-golang"
-	bingeoip "github.com/zu1k/proxypool/internal/bindata/geoip"
 )
 
 var geoIp GeoIP
 
 func InitGeoIpDB() {
-	err := bingeoip.RestoreAsset("", "assets/GeoLite2-City.mmdb")
-	if err != nil {
-		panic(err)
-	}
-	err = bingeoip.RestoreAsset("", "assets/flags.json")
-	if err != nil {
-		panic(err)
-	}
-	geoIp = NewGeoIP("assets/GeoLite2-City.mmdb", "assets/flags.json")
+	geoIp = NewGeoIP2()
 }
 
 // GeoIP2
@@ -38,30 +29,22 @@ type CountryEmoji struct {
 }
 
 // new geoip from db file
-func NewGeoIP(geodb, flags string) (geoip GeoIP) {
-	// 判断文件是否存在
-	_, err := os.Stat(geodb)
-	if err != nil && os.IsNotExist(err) {
-		log.Println("文件不存在，请自行下载 Geoip2 City库，并保存在", geodb)
+func NewGeoIP2() (geoip GeoIP) {
+	data, err := assets.FS.ReadFile("GeoLite2-City.mmdb")
+	if err != nil {
+		log.Println("Geoip2 City库打开失败")
 		os.Exit(1)
 	} else {
-		db, err := geoip2.Open(geodb)
+		db, err := geoip2.FromBytes(data)
 		if err != nil {
 			log.Fatal(err)
 		}
 		geoip.db = db
 	}
-
-	_, err = os.Stat(flags)
-	if err != nil && os.IsNotExist(err) {
-		log.Println("flags 文件不存在，请自行下载 flags.json，并保存在", flags)
+	if data, err := assets.FS.ReadFile("flags.json"); err != nil {
+		log.Println("flags.json 读取失败")
 		os.Exit(1)
 	} else {
-		data, err := ioutil.ReadFile(flags)
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
 		var countryEmojiList = make([]CountryEmoji, 0)
 		err = json.Unmarshal(data, &countryEmojiList)
 		if err != nil {

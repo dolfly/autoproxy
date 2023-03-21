@@ -4,6 +4,6 @@ import "testing"
 
 func TestConnect(t *testing.T) {
 	t.SkipNow()
-	//connect()
+	connect()
 	InitTables()
 }

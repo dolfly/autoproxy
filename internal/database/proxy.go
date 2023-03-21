@@ -1,8 +1,10 @@
 package database
 
 import (
-	"github.com/zu1k/proxypool/pkg/getter"
-	"github.com/zu1k/proxypool/pkg/proxy"
+	"fmt"
+
+	"github.com/dolfly/autoproxy/pkg/getter"
+	"github.com/dolfly/autoproxy/pkg/proxy"
 	"gorm.io/gorm"
 )
 
@@ -17,6 +19,7 @@ func InitTables() {
 	if DB == nil {
 		err := connect()
 		if err != nil {
+			fmt.Println(err)
 			return
 		}
 	}

@@ -1,0 +1,16 @@
+# your domain
+domain: proxy.diele.me
+database:
+  driver: "sqlite"
+  url: "proxypool.db"
+
+# cloudflare api
+cf_email: "dolfly@foxmail.com"
+cf_key: "9fe9560e8d153894ccb9b611dd7496ca9f541"
+
+# source definition file
+source-files:
+  # use local file
+  - conf/source.yaml
+  # use web file
+  - https://proxy.diele.me/source.yaml

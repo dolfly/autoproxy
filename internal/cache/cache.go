@@ -3,8 +3,8 @@ package cache
 import (
 	"time"
 
+	"github.com/dolfly/autoproxy/pkg/proxy"
 	"github.com/patrickmn/go-cache"
-	"github.com/zu1k/proxypool/pkg/proxy"
 )
 
 var c = cache.New(cache.NoExpiration, 10*time.Minute)

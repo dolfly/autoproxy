@@ -6,12 +6,12 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/dolfly/autoproxy/assets"
+	"github.com/dolfly/autoproxy/internal/cache"
+	"github.com/dolfly/autoproxy/internal/config"
+	"github.com/dolfly/autoproxy/pkg/provider"
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
-	"github.com/zu1k/proxypool/config"
-	binhtml "github.com/zu1k/proxypool/internal/bindata/html"
-	"github.com/zu1k/proxypool/internal/cache"
-	"github.com/zu1k/proxypool/pkg/provider"
 )
 
 const version = "v0.3.8"
@@ -22,14 +22,10 @@ func setupRouter() {
 	gin.SetMode(gin.ReleaseMode)
 	router = gin.New()
 	router.Use(gin.Recovery())
-	temp, err := loadTemplate()
-	if err != nil {
-		panic(err)
-	}
-	router.SetHTMLTemplate(temp)
-
+	templ := template.Must(template.New("").ParseFS(assets.FS, "html/*.tmpl", "html/*.yaml", "html/*.conf"))
+	router.SetHTMLTemplate(templ)
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "assets/html/index.html", gin.H{
+		c.HTML(http.StatusOK, "index.html", gin.H{
 			"domain":               config.Config.Domain,
 			"getters_count":        cache.GettersCount,
 			"all_proxies_count":    cache.AllProxiesCount,
@@ -44,25 +40,25 @@ func setupRouter() {
 	})
 
 	router.GET("/clash", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "assets/html/clash.html", gin.H{
+		c.HTML(http.StatusOK, "clash.html", gin.H{
 			"domain": config.Config.Domain,
 		})
 	})
 
 	router.GET("/surge", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "assets/html/surge.html", gin.H{
+		c.HTML(http.StatusOK, "surge.html", gin.H{
 			"domain": config.Config.Domain,
 		})
 	})
 
 	router.GET("/clash/config", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "assets/html/clash-config.yaml", gin.H{
+		c.HTML(http.StatusOK, "clash-config.yaml", gin.H{
 			"domain": config.Config.Domain,
 		})
 	})
 
 	router.GET("/surge/config", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "assets/html/surge.conf", gin.H{
+		c.HTML(http.StatusOK, "surge.conf", gin.H{
 			"domain": config.Config.Domain,
 		})
 	})
@@ -200,20 +196,7 @@ func Run() {
 	setupRouter()
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "6080"
 	}
 	router.Run(":" + port)
-}
-
-func loadTemplate() (t *template.Template, err error) {
-	_ = binhtml.RestoreAssets("", "assets/html")
-	t = template.New("")
-	for _, fileName := range binhtml.AssetNames() {
-		data := binhtml.MustAsset(fileName)
-		t, err = t.New(fileName).Parse(string(data))
-		if err != nil {
-			return nil, err
-		}
-	}
-	return t, nil
 }
