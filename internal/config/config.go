@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/dolfly/autoproxy/pkg/tool"
-	"github.com/ghodss/yaml"
+	"gopkg.in/yaml.v3"
 )
 
 var configFilePath = "config.yaml"

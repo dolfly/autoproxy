@@ -1,6 +1,7 @@
 package cloudflare
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -20,8 +21,8 @@ func test() {
 		log.Fatal(err)
 	}
 
-	// Fetch zone details
-	zone, err := api.ZoneDetails(id)
+	// // Fetch zone details
+	zone, err := api.ZoneDetails(context.Background(), id)
 	if err != nil {
 		log.Fatal(err)
 	}
