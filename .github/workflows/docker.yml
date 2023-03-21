@@ -17,5 +17,5 @@ jobs:
           username: dolfly
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: dolfly/autoproxy
+          repository: dolfly/autoproxy/autoproxy
           tag_with_ref: true
