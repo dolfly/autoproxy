@@ -2,5 +2,5 @@ package assets
 
 import "embed"
 
-// html *.json *.jpg *.mmdb
+//go:embed *.json *.jpg *.mmdb html/*
 var FS embed.FS

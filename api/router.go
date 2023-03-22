@@ -22,7 +22,7 @@ func setupRouter() {
 	gin.SetMode(gin.ReleaseMode)
 	router = gin.New()
 	router.Use(gin.Recovery())
-	templ := template.Must(template.New("").ParseFS(assets.FS, "html/*.tmpl", "html/*.yaml", "html/*.conf"))
+	templ := template.Must(template.New("").ParseFS(assets.FS, "html/*.html", "html/*.yaml", "html/*.conf"))
 	router.SetHTMLTemplate(templ)
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{

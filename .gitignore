@@ -23,3 +23,7 @@ vendor
 .DS_Store
 
 assets/html/
+__debug_bin
+autoproxy.db
+conf/
+amend.sh

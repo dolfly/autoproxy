@@ -15,7 +15,7 @@ func connect() (err error) {
 	fmt.Println(config.Config.Database.Driver)
 	switch config.Config.Database.Driver {
 	case "sqlite":
-		dsn := "proxypool.db"
+		dsn := "autoproxy.db"
 		if url := config.Config.Database.Url; url != "" {
 			dsn = url
 		}

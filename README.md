@@ -72,7 +72,7 @@ source.yaml 文件中定义了抓取源，需要定期手动维护更新
 使用 `-c` 参数指定配置文件路径，支持http链接
 
 ```shell
-proxypool -c config.yaml
+autoproxy -c config.yaml
 ```
 
 ## 截图

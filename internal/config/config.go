@@ -17,7 +17,7 @@ type ConfigOptions struct {
 	Database struct {
 		Driver string `json:"driver" yaml:"driver"`
 		Url    string `json:"url" yaml:"url"`
-	} `json:"database" yaml:"database_url"`
+	} `json:"database" yaml:"database"`
 	CFEmail     string   `json:"cf_email" yaml:"cf_email"`
 	CFKey       string   `json:"cf_key" yaml:"cf_key"`
 	SourceFiles []string `json:"source-files" yaml:"source-files"`

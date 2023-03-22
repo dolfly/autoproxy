@@ -32,7 +32,7 @@ type CountryEmoji struct {
 func NewGeoIP2() (geoip GeoIP) {
 	data, err := assets.FS.ReadFile("GeoLite2-City.mmdb")
 	if err != nil {
-		log.Println("Geoip2 City库打开失败")
+		log.Println("Geoip2 City库打开失败", err.Error())
 		os.Exit(1)
 	} else {
 		db, err := geoip2.FromBytes(data)
@@ -42,7 +42,7 @@ func NewGeoIP2() (geoip GeoIP) {
 		geoip.db = db
 	}
 	if data, err := assets.FS.ReadFile("flags.json"); err != nil {
-		log.Println("flags.json 读取失败")
+		log.Println("flags.json 读取失败", err.Error())
 		os.Exit(1)
 	} else {
 		var countryEmojiList = make([]CountryEmoji, 0)
